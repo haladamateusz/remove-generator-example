@@ -33,4 +33,8 @@ describe('my-generator generator', () => {
     const config = readProjectConfiguration(tree, 'test');
     expect(config).toBeDefined();
   });
+
+  afterEach(() => {
+    jest.resetModules();
+  });
 });

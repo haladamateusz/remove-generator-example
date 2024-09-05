@@ -58,4 +58,8 @@ describe('remove-generator generator', () => {
 
     expect(libraryFiles.length).toBe(0);
   });
+
+  afterEach(() => {
+    jest.resetModules();
+  });
 });
