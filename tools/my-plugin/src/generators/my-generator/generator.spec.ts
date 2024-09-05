@@ -11,6 +11,10 @@ describe('my-generator generator', () => {
   const options: MyGeneratorGeneratorSchema = { name: 'test' };
 
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+  });
+
+  beforeEach(() => {
     jest.doMock('@nx/devkit', () => ({
       ...jest.requireActual('@nx/devkit'),
       createProjectGraphAsync: jest.fn().mockImplementation(async () => ({
