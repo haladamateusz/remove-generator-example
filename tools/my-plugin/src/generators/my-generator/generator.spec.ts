@@ -6,6 +6,14 @@ import { MyGeneratorGeneratorSchema } from './schema';
 
 jest.mock('prettier', () => null);
 
+jest.mock('@nx/devkit', () => ({
+  ...jest.requireActual('@nx/devkit'),
+  createProjectGraphAsync: jest.fn().mockImplementation(async () => ({
+    nodes: {},
+    dependencies: {},
+  })),
+}));
+
 describe('my-generator generator', () => {
   let tree: Tree;
   const options: MyGeneratorGeneratorSchema = { name: 'test' };
@@ -14,15 +22,6 @@ describe('my-generator generator', () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
   });
 
-  beforeEach(() => {
-    jest.doMock('@nx/devkit', () => ({
-      ...jest.requireActual('@nx/devkit'),
-      createProjectGraphAsync: jest.fn().mockImplementation(async () => ({
-        nodes: {},
-        dependencies: {},
-      })),
-    }));
-  });
 
   beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
@@ -34,7 +33,4 @@ describe('my-generator generator', () => {
     expect(config).toBeDefined();
   });
 
-  afterEach(() => {
-    jest.resetModules();
-  });
 });
