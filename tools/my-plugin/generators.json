@@ -1,0 +1,14 @@
+{
+  "generators": {
+    "my-generator": {
+      "factory": "./src/generators/my-generator/generator",
+      "schema": "./src/generators/my-generator/schema.json",
+      "description": "my-generator generator"
+    },
+    "remove-generator": {
+      "factory": "./src/generators/remove-generator/generator",
+      "schema": "./src/generators/remove-generator/schema.json",
+      "description": "remove-generator generator"
+    }
+  }
+}
