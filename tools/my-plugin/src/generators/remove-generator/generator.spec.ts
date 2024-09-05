@@ -7,6 +7,14 @@ import testLibGenerator from '../my-generator/generator';
 
 jest.mock('prettier', () => null);
 
+jest.mock('@nx/devkit', () => ({
+  ...jest.requireActual('@nx/devkit'),
+  createProjectGraphAsync: jest.fn().mockImplementation(async () => ({
+    nodes: {},
+    dependencies: {},
+  })),
+}));
+
 describe('remove-generator generator', () => {
   let tree: Tree;
   const options: RemoveGeneratorGeneratorSchema = { name: 'test' };
