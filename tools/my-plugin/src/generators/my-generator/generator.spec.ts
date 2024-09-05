@@ -11,6 +11,16 @@ describe('my-generator generator', () => {
   const options: MyGeneratorGeneratorSchema = { name: 'test' };
 
   beforeEach(() => {
+    jest.doMock('@nx/devkit', () => ({
+      ...jest.requireActual('@nx/devkit'),
+      createProjectGraphAsync: jest.fn().mockImplementation(async () => ({
+        nodes: {},
+        dependencies: {},
+      })),
+    }));
+  });
+
+  beforeEach(() => {
     tree = createTreeWithEmptyWorkspace();
   });
 
